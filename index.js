@@ -324,7 +324,7 @@ client.on("message", (message)=>{
     	   if(!mencionado) return message.reply("No has mencionado a ningun miembro.");
     	   if(!razon) return message.reply("Escribe una razon del uso de Ban.");
 
-    	   message.guild.member(mencionado).ban(razon);
+    	   message.guild.member(mencionado).ban(razon); 
     	   message.channel.send(`**${{mencionado.username}}**, fue Baneado del servidor por: ${{razon}}.`);
 
     break;

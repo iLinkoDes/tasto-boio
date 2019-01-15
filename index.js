@@ -137,20 +137,6 @@ client.on("message", (message)=>{
 
     break;
 
-    // Comando KICK
-    case "kick":
-
-          let mencionado = message.mentions.users.first();
-          let razon = args.slice(1).join(' ');
-
-          if(!mencionado) return message.reply('No ha mencionando a ningún miembro.');
-          if(!razon) return message.reply('Escriba una razón del uso de kick.');
-
-          message.guild.member(mencionado).kick(razon);
-          message.channel.send(`**${mencionado.username}**, fue pateado del servidor, razón: ${razon}.`);
-
-    break;
-
     // Comando HELP
     case "help":
 
@@ -312,6 +298,33 @@ client.on("message", (message)=>{
               }).catch(error => console.log(error));
 
           };
+
+    break;
+
+     // Comando KICK
+    case "kick":
+
+          let mencionado = message.mentions.users.first();
+          let razon = args.slice(1).join(' ');
+
+          if(!mencionado) return message.reply('No ha mencionando a ningún miembro.');
+          if(!razon) return message.reply('Escriba una razón del uso de Kick.');
+
+          message.guild.member(mencionado).kick(razon);
+          message.channel.send(`**${mencionado.username}**, fue pateado del servidor, razón: ${razon}.`);
+
+    break;
+
+    case "ban"
+
+    	   let mencionado = message.mentions.users.first();
+    	   let razon = args.slice(1).join(' ');
+
+    	   if(!mencionado) return message.reply("No has mencionado a ningun miembro.");
+    	   if(!razon) return message.reply("Escribe una razon del uso de Ban.");
+
+    	   message.guild.member(mencionado).ban(razon);
+    	   message.channel.send(`**${{mencionado.username}}**, fue Baneado del servidor por: ${{razon}}.`)
 
     break;
   }

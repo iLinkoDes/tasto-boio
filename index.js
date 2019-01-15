@@ -147,7 +147,7 @@ client.on("message", (message)=>{
           .setThumbnail(message.author.avatarURL)
           .setTitle("Comandos Disponibles")
           .addField("❯ GENERAL", "`hola` `embed` `mini` `arg` `args`")
-          .addField("❯ MODERACION", "`kick` `purgar`")
+          .addField("❯ MODERACION", "`kick` `purgar` `ban` `rol`")
           .addField("❯ UTILIDAD", "`ping` `datos` `servidor` `avatar` ")
           .setColor(0x66b3ff)
           message.author.send({embed});
@@ -315,7 +315,8 @@ client.on("message", (message)=>{
 
     break;
 
-    case "ban"
+    // Comando BAN
+    case "ban":
 
     	   let mencionado = message.mentions.users.first();
     	   let razon = args.slice(1).join(' ');
@@ -324,7 +325,7 @@ client.on("message", (message)=>{
     	   if(!razon) return message.reply("Escribe una razon del uso de Ban.");
 
     	   message.guild.member(mencionado).ban(razon);
-    	   message.channel.send(`**${{mencionado.username}}**, fue Baneado del servidor por: ${{razon}}.`)
+    	   message.channel.send(`**${{mencionado.username}}**, fue Baneado del servidor por: ${{razon}}.`);
 
     break;
   }

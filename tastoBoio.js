@@ -325,6 +325,21 @@ client.on("message", (message)=>{
           };
 
     break;
+
+    case "leave":
+          let Canalvoz = message.member.voiceChannel;
+
+          if(!Canalvoz) {
+              message.channel.send('No estas conectado a un canal de voz.');
+
+          } else {
+              message.channel.send('Dejando el canal de voz.').then(() => {
+                  Canalvoz.leave();
+
+              }).catch(error => console.log(error));
+
+          } 
+    break;
   }
   
 });

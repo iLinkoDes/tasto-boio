@@ -321,7 +321,7 @@ client.on("message", (message)=>{
               message.channel.send('Conectando...').then(m => {
                   Canalvoz.join().then(() => {
                       m.edit('Conectado exitosamente.').catch(error => console.log(error));
-                      const dispatcher = message.guild.voiceConnection.playFile(`C:\Users\HOME\Music\Chinsaku-MiPueblo.mp3`);
+                      const dispatcher = message.guild.voiceConnection.playFile(`music/Chinsaku-MiPueblo.mp3`);
                   }).catch(error => console.log(error));
 
               }).catch(error => console.log(error));

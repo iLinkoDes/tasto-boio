@@ -330,14 +330,14 @@ client.on("message", (message)=>{
     break;
 
     case "leave":
-          let Canalvoz = message.member.voiceChannel;
+          let CanalvozL = message.member.voiceChannel;
 
-          if(!Canalvoz) {
+          if(!CanalvozL) {
               message.channel.send('No estas conectado a un canal de voz.');
 
           } else {
               message.channel.send('Dejando el canal de voz.').then(() => {
-                  Canalvoz.leave();
+                  CanalvozL.leave();
 
               }).catch(error => console.log(error));
 

@@ -305,6 +305,44 @@ client.on("message", (message)=>{
     	   message.channel.send(`**${mencionadoBan.username}**, fue Baneado del servidor, razón: ${razonBan}.`);
 
     break;
+
+    case "join":
+
+          let Canalvoz = message.member.voiceChannel;
+
+          if(!Canalvoz || Canalvoz.type !== 'voice') {
+              message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+
+          } else if (message.guild.voiceConnection) {
+              message.channel.send('Ya estoy conectado en un canal de voz.');
+
+          } else {
+              message.channel.send('Conectando...').then(m => {
+                  Canalvoz.join().then(() => {
+                      m.edit('Conectado exitosamente.').catch(error => console.log(error));
+
+                  }).catch(error => console.log(error));
+
+              }).catch(error => console.log(error));
+
+          };
+
+    break;
+
+    case "leave":
+          let Canalvoz = message.member.voiceChannel;
+
+          if(!Canalvoz) {
+              message.channel.send('No estas conectado a un canal de voz.');
+
+          } else {
+              message.channel.send('Dejando el canal de voz.').then(() => {
+                  Canalvoz.leave();
+
+              }).catch(error => console.log(error));
+
+          } 
+    break;
   }
   
 });

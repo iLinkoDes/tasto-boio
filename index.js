@@ -325,7 +325,7 @@ client.on("message", (message)=>{
     	   if(!razonBan) return message.reply("Escribe una razon del uso de Ban.");
 
     	   message.guild.member(mencionadoBan).ban(razonBan); 
-    	   message.channel.send(`**${{mencionadoBan.username}}**, fue Baneado del servidor por: ${{razonBan}}.`);
+    	   message.channel.send(`**${{mencionadoBan}}**, fue Baneado del servidor por: ${{razonBan}}.`);
 
     break;
   }

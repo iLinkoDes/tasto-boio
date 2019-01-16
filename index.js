@@ -278,29 +278,6 @@ client.on("message", (message)=>{
         };
     break;
 
-    case "join":
-
-          let Canalvoz = message.member.voiceChannel;
-
-          if(!Canalvoz || Canalvoz.type !== 'voice') {
-              message.reply('¡Necesitas unirte a un canal de voz primero!.');
-
-          } else if (message.guild.voiceConnection) {
-              message.reply('Ya estoy conectado en un canal de voz.');
-
-          } else {
-              message.reply('Conectando...').then(m => {
-                  Canalvoz.join().then(() => {
-                      m.edit('Conectado exitosamente.').catch(error => console.log(error));
-
-                  }).catch(error => console.log(error));
-
-              }).catch(error => console.log(error));
-
-          };
-
-    break;
-
      // Comando KICK
     case "kick":
 
@@ -324,8 +301,8 @@ client.on("message", (message)=>{
     	   if(!mencionadoBan) return message.reply("No has mencionado a ningun miembro.");
     	   if(!razonBan) return message.reply("Escribe una razon del uso de Ban.");
 
-    	   message.guild.member(mencionadoBan).ban(razonBan); 
-    	   message.channel.send(`**${{mencionadoBan}}**, fue Baneado del servidor por: ${{razonBan}}.`);
+    	   message.guild.member(mencionadoBan).kick(razonBan);
+    	   message.channel.send(`**${mencionadoBan.username}**, fue Baneado del servidor, razón: ${razonBan}.`);
 
     break;
   }

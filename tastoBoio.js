@@ -308,13 +308,13 @@ client.on("message", (message)=>{
           let Canalvoz = message.member.voiceChannel;
 
           if(!Canalvoz || Canalvoz.type !== 'voice') {
-              message.reply('¡Necesitas unirte a un canal de voz primero!.');
+              message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
 
           } else if (message.guild.voiceConnection) {
-              message.reply('Ya estoy conectado en un canal de voz.');
+              message.channel.send('Ya estoy conectado en un canal de voz.');
 
           } else {
-              message.reply('Conectando...').then(m => {
+              message.channel.send('Conectando...').then(m => {
                   Canalvoz.join().then(() => {
                       m.edit('Conectado exitosamente.').catch(error => console.log(error));
 

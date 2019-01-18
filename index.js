@@ -366,7 +366,7 @@ client.on("message", (message)=>{
 
           } 
     break;
-/*
+
     case "join":
 
             let urlYT = args[1];
@@ -378,7 +378,7 @@ client.on("message", (message)=>{
 
     break;
 
-    */
+
   }
   
 });

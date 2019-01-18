@@ -50,7 +50,7 @@ client.on('message', async messageAS => {
 
           let Canalvoz = messageAS.member.voiceChannel;
           let urlYT = args[1];
-          String(urlYT);
+          var purlYT = urlYT.parse(req.url, true).pathname;
 
           if(!Canalvoz || Canalvoz.type !== 'voice') {
               messageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
@@ -64,11 +64,11 @@ client.on('message', async messageAS => {
                   const m = await messageAS.channel.send('connecting')
 
                   Canalvoz.join().then((connection) => {
-                      m.edit('U Suck').catch(error => console.log(error));
+                      m.edit('Nope').catch(error => console.log(error));
                       
                       const ytdl = require('ytdl-core');
                       connection.play(ytdl(
-                        urlYT,
+                        purlYT,
                         { filter: 'audioonly' }));
 
                   }).catch(error => console.log(error));

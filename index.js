@@ -48,34 +48,24 @@ client.on('message', async messageAS => {
 
         case "play":
 
-          let Canalvoz = messageAS.member.voiceChannel;
-          let urlYT = args[1];
-          var purlYT = urlYT.parse(req.url, true).pathname;
+          const ytdl = require('ytdl-core');
 
-          if(!Canalvoz || Canalvoz.type !== 'voice') {
-              messageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+          let Canalvoz = message.member.voiceChannel;
 
-          } else if (messageAS.guild.voiceConnection) {
-              messageAS.channel.send('Ya estoy conectado en un canal de voz.');
+          if(!Canalvoz) return message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+          if(!args) return message.channel.send('Ingrese un enlace de youtube para poder reproducirlo.');
 
+          Canalvoz.join()
+              .then(connection => {
+                  const url = ytdl(args.join(' '), { filter : 'audioonly' });
+                  const dispatcher = connection.playStream(url);
 
-          } else {
+                  message.delete();
+                  message.channel.send('Reproduciendo ahora: '+ args);
+                  
+              }).catch(console.error);
 
-                  const m = await messageAS.channel.send('connecting')
-
-                  Canalvoz.join().then((connection) => {
-                      m.edit('Nope').catch(error => console.log(error));
-                      
-                      const ytdl = require('ytdl-core');
-                      connection.play(ytdl(
-                        purlYT,
-                        { filter: 'audioonly' }));
-
-                  }).catch(error => console.log(error));
-
-             
-
-          };
+            
 
         };
   });
@@ -369,12 +359,7 @@ client.on("message", (message)=>{
 
     case "join":
 
-            let urlYT = args[1];
-
-            const ytdl = require('ytdl-core');
-            connection.play(ytdl(
-              urlYT,
-              { filter: 'audioonly' }));
+            
 
     break;
 

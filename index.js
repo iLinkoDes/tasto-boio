@@ -12,7 +12,7 @@ client.on("ready", () => {
    client.user.setPresence({
        status: "online",
        game: {
-           name: "tb help for help",
+           name: "tb! help for help",
            type: "PLAYING"
        }
    });
@@ -292,7 +292,7 @@ client.on('message', async message => {
 
         break;
 
-        case "leave":
+        case "stop":
               let CanalvozL = message.member.voiceChannel;
 
               if(!CanalvozL) {
@@ -358,7 +358,7 @@ client.on("message", (messageMD)=>{
           .addField("❯ GENERAL", "`hola` `embed` `mini` `arg` `args`")
           .addField("❯ MODERACION", "`kick` `purgar` `ban` `rol`")
           .addField("❯ UTILIDAD", "`ping` `datos` `servidor` `avatar` ")
-          .addFIeld("❯ MUSICA","`play` `volumen` `stop` `pause` `play`")
+          .addFIeld("❯ MUSICA","`play` `stop`")
           .setColor(0x66b3ff)
           messageMD.author.send({embed});
     break;

@@ -307,29 +307,80 @@ client.on('message', async message => {
               } 
         break;
 
-            case "play":
+        case "play":
 
-              const ytdl = require('ytdl-core');
+          const ytdl = require('ytdl-core');
 
-              let Canalvoz = message.member.voiceChannel;
-              let video = args[0];
+          let Canalvoz = message.member.voiceChannel;
+          let video = args[0];
 
-              if(!Canalvoz) return messagemessageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
-              if(!video) return message.channel.send('Ingrese un enlace de youtube para poder reproducirlo.');
+          if(!Canalvoz) return messagemessageAS.channel.send('You are not in a Voice Channel!.');
+          if(!video) return message.channel.send('You Need a YouTube Video!.');
 
-              Canalvoz.join()
-                  .then(connection => {
-                      const url = ytdl(args.join(' '), { filter : 'audioonly' });
-                      const dispatcher = connection.playStream(url);
+          Canalvoz.join()
+              .then(connection => {
+                  const url = ytdl(args.join(' '), { filter : 'audioonly' });
+                  const dispatcher = connection.playStream(url);
 
-                      message.delete();
-                      message.channel.send('Reproduciendo ahora: '+ video);
-                      
-                  }).catch(console.error);
+                  message.delete();
+                  message.channel.send('Now Playing: '+ video);
+                  
+              }).catch(console.error);
 
-                
+        break;
 
-            };
+        case "google":
+
+          /*
+          Script para busquedas de google.com usando modulos rastreadores
+
+          Los package ha utilizar son cheerio, snekfetch y querystring.
+          instalación:
+          npm install cheerio
+          npm install snekfetch
+          npm install querystring
+
+          */
+
+          const cheerio = require('cheerio'),
+                snekfetch = require('snekfetch'),
+                querystring = require('querystring');
+
+          //Esta variable gerena una URL de nuestra busqueda/consulta (args)
+          let buscarUrl = `https://www.google.com/search?q=${encodeURIComponent(args)}`;
+
+          message.channel.send(':arrows_counterclockwise: Buscado..')
+          .then(m =>{
+                  //Ahora usamos snekfetch para rastrear en Google.com
+                  return snekfetch.get(buscarUrl).then((result) =>{
+
+                        //Cheerio nos permite analizar el HTML en su resultado de google para tomar la URL
+                        let $ = cheerio.load(result.text);
+
+                        //la variable googleData nos permite tomar la URL desde la instancia de la página (HTML)
+                        let googleData = $('.r').first().find('a').first().attr('href');
+                        
+                        //Ahora que tenemos nuestros datos de Google, podemos enviarlos al canal.
+                        googleData = querystring.parse(googleData.replace('/url?', ''));
+                        
+                        //resultado de busqueda
+                        m.edit(googleData.q)
+
+                  //Usamos nuestro bloque catch, Si no se encuentran resultados.
+                  }).catch((err) => {
+                        m.edit(':no_entry: No se han encontrado resultados!');
+                  });
+
+          });
+
+/*
+
+NOTA: Genera busquedas concretas, no definiciones o detalles.
+*/
+
+        break;
+
+        };
 
       });
 

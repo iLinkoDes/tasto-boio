@@ -310,6 +310,7 @@ client.on("message", (message)=>{
     case "play":
 
           let Canalvoz = message.member.voiceChannel;
+          let urlYT = args[1];
 
           if(!Canalvoz || Canalvoz.type !== 'voice') {
               message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
@@ -319,10 +320,15 @@ client.on("message", (message)=>{
 
 
           } else {
-              message.channel.send('Conectando...').then(m => {
+              message.channel.send('Connecting...').then(connection => {
                   Canalvoz.join().then(() => {
-                      m.edit('Conectado exitosamente.').catch(error => console.log(error));
-                      const dispatcher = message.guild.voiceConnection.playFile(`music/Chinsaku-MiPueblo.mp3`);
+                      connection.edit('Connection Success.').catch(error => console.log(error));
+                      
+                      const ytdl = require('ytdl-core');
+                      connection.play(ytdl(
+                        urlYT,
+                        { filter: 'audioonly' }));
+                      
                   }).catch(error => console.log(error));
 
               }).catch(error => console.log(error));  

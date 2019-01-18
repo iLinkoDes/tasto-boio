@@ -49,8 +49,34 @@ client.on('message', async message => {
             // Comando PING
         case "ping":
 
-              let ping = Math.floor(message.client.ping);
-              message.channel.send(":ping_pong: Pong!, " + ping + " ms!");
+              /*
+
+              Obtiene el ping de la API de Discord en MS
+              y muestra el ping, segun el estado cambia de color.
+
+              Usando condiciones if()
+              */
+
+              let ping = Math.floor(message.client.ping); 
+
+              if (ping > 300) {
+                  let embed = new Discord.RichEmbed().setDescription(":satellite: Pong! **" + ping + "ms.**")
+                  .setColor(0xff0000)
+                  message.channel.send(embed);
+                  
+
+              } else if (ping > 150) {
+                  let embed = new Discord.RichEmbed().setDescription(":satellite: Pong! **" + ping + "ms.**")
+                  .setColor(0xffcc00)
+                  message.channel.send(embed);
+
+
+              } else {
+                  let embed = new Discord.RichEmbed().setDescription(":satellite: Pong! **" + ping + "ms.**")
+                  .setColor(0x66ff66)
+                  message.channel.send(embed);
+
+              }
 
         break;
 
@@ -329,60 +355,6 @@ client.on('message', async message => {
 
         break;
 
-        case "google":
-
-          /*
-          Script para busquedas de google.com usando modulos rastreadores
-
-          Los package ha utilizar son cheerio, snekfetch y querystring.
-          instalación:
-          npm install cheerio
-          npm install snekfetch
-          npm install querystring
-
-          */
-
-          const cheerio = require('cheerio'),
-                fetch = require('node-fetch'),
-                querystring = require('querystring');
-
-          let busqueda = args[0];
-
-          if(!busqueda) return message.reply("No ingresaste ninguna busqueda.");
-
-          //Esta variable gerena una URL de nuestra busqueda/consulta (args)
-          let buscarUrl = `https://www.google.com/search?q=${encodeURIComponent(args)}`;
-          console.log(buscarUrl);
-          message.channel.send(':arrows_counterclockwise: Buscado..')
-          .then(m =>{
-                  //Ahora usamos snekfetch para rastrear en Google.com
-                  return fetch.get(buscarUrl).then((result) =>{
-
-                        //Cheerio nos permite analizar el HTML en su resultado de google para tomar la URL
-                        let $ = cheerio.load(result.text);
-
-                        //la variable googleData nos permite tomar la URL desde la instancia de la página (HTML)
-                        let googleData = $('.r').first().find('a').first().attr('href');
-                        
-                        //Ahora que tenemos nuestros datos de Google, podemos enviarlos al canal.
-                        googleData = querystring.parse(googleData.replace('/url?', ''));
-                        
-                        //resultado de busqueda
-                        m.edit(googleData.q)
-
-                  //Usamos nuestro bloque catch, Si no se encuentran resultados.
-                  }).catch((err) => {
-                        m.edit(':no_entry: No se han encontrado resultados!');
-                  });
-
-          });
-
-/*
-
-NOTA: Genera busquedas concretas, no definiciones o detalles.
-*/
-
-        break;
 
         };
 

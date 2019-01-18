@@ -50,18 +50,18 @@ client.on('message', async messageAS => {
 
           const ytdl = require('ytdl-core');
 
-          let Canalvoz = message.member.voiceChannel;
+          let Canalvoz = messageAS.member.voiceChannel;
 
-          if(!Canalvoz) return message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
-          if(!args) return message.channel.send('Ingrese un enlace de youtube para poder reproducirlo.');
+          if(!Canalvoz) return messageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+          if(!args) return messageAS.channel.send('Ingrese un enlace de youtube para poder reproducirlo.');
 
           Canalvoz.join()
               .then(connection => {
                   const url = ytdl(args.join(' '), { filter : 'audioonly' });
                   const dispatcher = connection.playStream(url);
 
-                  message.delete();
-                  message.channel.send('Reproduciendo ahora: '+ args);
+                  messageAS.delete();
+                  messageAS.channel.send('Reproduciendo ahora: '+ args);
                   
               }).catch(console.error);
 

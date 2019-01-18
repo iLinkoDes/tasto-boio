@@ -39,6 +39,47 @@ client.on("debug", (e) => console.info(e));
 
 // ====Funciones Primordiales del Bot=====
 
+client.on('message', async messageAS => {
+
+        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const command = args.shift().toLowerCase();
+
+        switch (command){
+
+        case "play":
+
+          let Canalvoz = message.member.voiceChannel;
+          let urlYT = args[1];
+          String(urlYT);
+
+          if(!Canalvoz || Canalvoz.type !== 'voice') {
+              message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+
+          } else if (message.guild.voiceConnection) {
+              message.channel.send('Ya estoy conectado en un canal de voz.');
+
+
+          } else {
+
+                  const m = await message.channel.send('connecting')
+
+                  Canalvoz.join().then((m) => {
+                      m.edit('U Suck').catch(error => console.log(error));
+                      
+                      const ytdl = require('ytdl-core');
+                      m.play(ytdl(
+                        urlYT,
+                        { filter: 'audioonly' }));
+
+                  }).catch(error => console.log(error));
+
+             
+
+          };
+
+        };
+  });
+
 client.on("message", (message)=>{
   if (!message.content.startsWith(prefix)) return; 
   if (message.author.bot) return;
@@ -307,36 +348,7 @@ client.on("message", (message)=>{
 
     break;
 
-    case "play":
-
-          let Canalvoz = message.member.voiceChannel;
-          let urlYT = args[1];
-          String(urlYT);
-
-          if(!Canalvoz || Canalvoz.type !== 'voice') {
-              message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
-
-          } else if (message.guild.voiceConnection) {
-              message.channel.send('Ya estoy conectado en un canal de voz.');
-
-
-          } else {
-
-                  const m = await message.channel.send('connecting')
-
-                  Canalvoz.join().then((m) => {
-                      m.edit('U Suck').catch(error => console.log(error));
-                      
-                      const ytdl = require('ytdl-core');
-                      m.play(ytdl(
-                        urlYT,
-                        { filter: 'audioonly' }));
-
-                  }).catch(error => console.log(error));
-
-             
-
-          };
+    
 
     break;
 
@@ -370,6 +382,8 @@ client.on("message", (message)=>{
   }
   
 });
+
+
 
 //Propiedades Client del Bot
 

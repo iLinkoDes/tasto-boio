@@ -41,27 +41,27 @@ client.on("debug", (e) => console.info(e));
 
 client.on('message', async messageAS => {
 
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const args = messageAS.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
         switch (command){
 
         case "play":
 
-          let Canalvoz = message.member.voiceChannel;
+          let Canalvoz = messageAS.member.voiceChannel;
           let urlYT = args[1];
           String(urlYT);
 
           if(!Canalvoz || Canalvoz.type !== 'voice') {
-              message.channel.send('¡Necesitas unirte a un canal de voz primero!.');
+              messageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
 
           } else if (message.guild.voiceConnection) {
-              message.channel.send('Ya estoy conectado en un canal de voz.');
+              messageAS.channel.send('Ya estoy conectado en un canal de voz.');
 
 
           } else {
 
-                  const m = await message.channel.send('connecting')
+                  const m = await messageAS.channel.send('connecting')
 
                   Canalvoz.join().then((m) => {
                       m.edit('U Suck').catch(error => console.log(error));

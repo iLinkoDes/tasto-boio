@@ -321,8 +321,8 @@ client.on("message", (message)=>{
 
 
           } else {
-              message.channel.send('Connecting...').then(connection => {
-                  Canalvoz.join().then(() => {
+              message.channel.send('Connecting...').then( => {
+                  Canalvoz.join().then((connection) => {
                       connection.edit('Connection Success.').catch(error => console.log(error));
                       
                       const ytdl = require('ytdl-core');

@@ -343,7 +343,7 @@ client.on('message', async message => {
           */
 
           const cheerio = require('cheerio'),
-                snekfetch = require('snekfetch'),
+                fetch = require('node-fetch'),
                 querystring = require('querystring');
 
           let busqueda = args[0];

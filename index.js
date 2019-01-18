@@ -55,7 +55,7 @@ client.on('message', async messageAS => {
           if(!Canalvoz || Canalvoz.type !== 'voice') {
               messageAS.channel.send('¡Necesitas unirte a un canal de voz primero!.');
 
-          } else if (message.guild.voiceConnection) {
+          } else if (messageAS.guild.voiceConnection) {
               messageAS.channel.send('Ya estoy conectado en un canal de voz.');
 
 

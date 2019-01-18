@@ -321,7 +321,7 @@ client.on("message", (message)=>{
 
 
           } else {
-              message.channel.send('Connecting...').then( => {
+              message.channel.send('Connecting...').then(connection => {
                   Canalvoz.join().then((connection) => {
                       connection.edit('Connection Success.').catch(error => console.log(error));
                       

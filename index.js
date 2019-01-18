@@ -62,13 +62,14 @@ client.on('message', async messageAS => {
                   const dispatcher = connection.playStream(url);
 
                   messageAS.delete();
-                  messageAS.channel.send('Reproduciendo ahora: '+ video);
+                  messageAS.channel.send('Reproduciendo ahora: '+ video.name);
                   
               }).catch(console.error);
 
             
 
         };
+
   });
 
 client.on("message", (message)=>{

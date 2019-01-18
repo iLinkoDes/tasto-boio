@@ -352,7 +352,7 @@ client.on('message', async message => {
 
           //Esta variable gerena una URL de nuestra busqueda/consulta (args)
           let buscarUrl = `https://www.google.com/search?q=${encodeURIComponent(args)}`;
-
+          console.log(buscarUrl);
           message.channel.send(':arrows_counterclockwise: Buscado..')
           .then(m =>{
                   //Ahora usamos snekfetch para rastrear en Google.com

@@ -321,11 +321,14 @@ client.on("message", (message)=>{
 
 
           } else {
-                  Canalvoz.join().then((connect) => {
-                      connect.edit('Connection Success.').catch(error => console.log(error));
+
+                  const m = await message.channel.send('connecting')
+
+                  Canalvoz.join().then((m) => {
+                      m.edit('U Suck').catch(error => console.log(error));
                       
                       const ytdl = require('ytdl-core');
-                      connect.play(ytdl(
+                      m.play(ytdl(
                         urlYT,
                         { filter: 'audioonly' }));
 

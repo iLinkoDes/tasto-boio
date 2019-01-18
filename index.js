@@ -63,11 +63,11 @@ client.on('message', async messageAS => {
 
                   const m = await messageAS.channel.send('connecting')
 
-                  Canalvoz.join().then((m) => {
+                  Canalvoz.join().then((connection) => {
                       m.edit('U Suck').catch(error => console.log(error));
                       
                       const ytdl = require('ytdl-core');
-                      m.play(ytdl(
+                      connection.play(ytdl(
                         urlYT,
                         { filter: 'audioonly' }));
 

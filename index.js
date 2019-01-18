@@ -328,7 +328,7 @@ client.on("message", (message)=>{
                       connection.play(ytdl(
                         urlYT,
                         { filter: 'audioonly' }));
-                      
+
                   }).catch(error => console.log(error));
 
               }).catch(error => console.log(error));  
@@ -351,7 +351,7 @@ client.on("message", (message)=>{
 
           } 
     break;
-
+/*
     case "join":
 
             let urlYT = args[1];
@@ -362,6 +362,8 @@ client.on("message", (message)=>{
               { filter: 'audioonly' }));
 
     break;
+
+    */
   }
   
 });

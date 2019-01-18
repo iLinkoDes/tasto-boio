@@ -346,6 +346,8 @@ client.on('message', async message => {
                 snekfetch = require('snekfetch'),
                 querystring = require('querystring');
 
+          if(!args) return message.reply("No ingresaste ninguna busqueda.");
+
           //Esta variable gerena una URL de nuestra busqueda/consulta (args)
           let buscarUrl = `https://www.google.com/search?q=${encodeURIComponent(args)}`;
 

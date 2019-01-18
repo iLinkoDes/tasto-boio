@@ -356,7 +356,7 @@ client.on('message', async message => {
           message.channel.send(':arrows_counterclockwise: Buscado..')
           .then(m =>{
                   //Ahora usamos snekfetch para rastrear en Google.com
-                  return snekfetch.get(buscarUrl).then((result) =>{
+                  return fetch.get(buscarUrl).then((result) =>{
 
                         //Cheerio nos permite analizar el HTML en su resultado de google para tomar la URL
                         let $ = cheerio.load(result.text);

@@ -310,7 +310,7 @@ client.on("message", (message)=>{
     case "play":
 
           let Canalvoz = message.member.voiceChannel;
-          let urlYT = args[1];
+          let urlYT = args[1].toString();
 
           if(!Canalvoz || Canalvoz.type !== 'voice') {
               message.channel.send('¡Necesitas unirte a un canal de voz primero!.');

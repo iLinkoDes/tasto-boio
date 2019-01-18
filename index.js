@@ -333,6 +333,8 @@ client.on("message", (message)=>{
 
     case "volumen":
 
+            const dispatcher = message.guild.voiceConnection;
+
             let nivel = args[0];
 
             if(!nivel) return message.reply("ingresa un nivel de volumen! [0-100].");

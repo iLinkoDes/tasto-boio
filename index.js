@@ -149,6 +149,7 @@ client.on("message", (message)=>{
           .addField("❯ GENERAL", "`hola` `embed` `mini` `arg` `args`")
           .addField("❯ MODERACION", "`kick` `purgar` `ban` `rol`")
           .addField("❯ UTILIDAD", "`ping` `datos` `servidor` `avatar` ")
+          .addFIeld("❯ MUSICA","`play` `volumen` `stop` `pause` `play`")
           .setColor(0x66b3ff)
           message.author.send({embed});
     break;
@@ -306,7 +307,7 @@ client.on("message", (message)=>{
 
     break;
 
-    case "join":
+    case "play":
 
           let Canalvoz = message.member.voiceChannel;
 
@@ -327,6 +328,16 @@ client.on("message", (message)=>{
               }).catch(error => console.log(error));  
 
           };
+
+    break;
+
+    case "volumen":
+
+            let nivel = args[0];
+
+            if(!nivel) return message.reply("ingresa un nivel de volumen! [0-100].");
+
+            dispatcher.setVolume(nivel);
 
     break;
 

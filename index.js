@@ -322,11 +322,11 @@ client.on("message", (message)=>{
 
           } else {
               message.channel.send('Connecting...').then(connection => {
-                  Canalvoz.join().then((connection) => {
-                      connection.edit('Connection Success.').catch(error => console.log(error));
+                  Canalvoz.join().then((connect) => {
+                      connect.edit('Connection Success.').catch(error => console.log(error));
                       
                       const ytdl = require('ytdl-core');
-                      connection.play(ytdl(
+                      connect.play(ytdl(
                         urlYT,
                         { filter: 'audioonly' }));
 

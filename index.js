@@ -58,7 +58,7 @@ client.on('message', async messageAS => {
 
           Canalvoz.join()
               .then(connection => {
-                  const url = ytdl(video.join(' '), { filter : 'audioonly' });
+                  const url = ytdl(connection.join(' '), { filter : 'audioonly' });
                   const dispatcher = connection.playStream(url);
 
                   messageAS.delete();

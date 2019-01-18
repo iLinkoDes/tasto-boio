@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 let prefix = process.env.PREFIX;
 
+let cooldown= new Set();
+
 // Comprobacion de Funcionamiento
 client.on("ready", () => {
    console.log(`Estoy listo!, 
@@ -49,13 +51,18 @@ client.on('message', async message => {
             // Comando PING
         case "ping":
 
-              /*
+             if(cooldown.has(message.author.id)){
+                   message.channel.send(message.author.username+ " utilice el comando despues de 5 segs segundos!");
+                   return;
+                }
+                //Si no se encuentra dentro del enfriamiento, agrega al usuario para que
+                //no pueda utilizar el comando durante 10 segundos.
+                cooldown.add(message.author.id);
 
-              Obtiene el ping de la API de Discord en MS
-              y muestra el ping, segun el estado cambia de color.
-
-              Usando condiciones if()
-              */
+                //Quita al usuario del enfriamiento después de pasar los 10 segundos.
+                setTimeout(() => {
+                  cooldown.delete(message.author.id);
+                }, 5000);
 
               let ping = Math.floor(message.client.ping); 
 

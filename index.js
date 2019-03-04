@@ -395,7 +395,7 @@ client.on("message", (messageMD)=>{
           .addField("❯ MUSICA","`play` `stop`")
           .setColor(0x66b3ff)
           messageMD.author.send({embed});
-          console.log('help sended!');
+          //console.log('help sended!');
     break;
 
   }

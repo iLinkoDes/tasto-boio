@@ -392,7 +392,7 @@ client.on("message", (messageMD)=>{
           .addField("❯ GENERAL", "`hola` `embed` `mini` `arg` `args`")
           .addField("❯ MODERACION", "`kick` `purgar` `ban` `rol`")
           .addField("❯ UTILIDAD", "`ping` `datos` `servidor` `avatar` ")
-          .addFIeld("❯ MUSICA","`play` `stop`")
+          .addField("❯ MUSICA","`play` `stop`")
           .setColor(0x66b3ff)
           messageMD.author.send({embed});
     break;
